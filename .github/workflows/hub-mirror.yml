@@ -16,6 +16,21 @@ jobs:
     if: contains(github.event.issue.labels.*.name, 'hub-mirror')
     # 镜像转换任务的步骤列表
     steps:
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          # this might remove tools that are actually needed,
+          # if set to "true" but frees about 6 GB
+          tool-cache: true
+          
+          # all of these default to true, but feel free to set to
+          # "false" if necessary for your workflow
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
       # 1. 切换分支（默认主分支）
       - name: Check out code
         uses: actions/checkout@v2
